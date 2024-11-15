@@ -402,8 +402,8 @@ pub const Window = struct {
         c.SDL_SetWindowSize(w.ptr, s.width, s.height);
     }
 
-    pub fn setMinimumSize(w: Window, width: c_int, height: c_int) void {
-        c.SDL_SetWindowMinimumSize(w.ptr, width, height);
+    pub fn setMinimumSize(w: Window, width: u32, height: u32) void {
+        c.SDL_SetWindowMinimumSize(w.ptr, @intCast(width), @intCast(height));
     }
 
     pub fn getDisplayMode(w: Window) !DisplayMode {
@@ -726,7 +726,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn drawLines(ren: Renderer, points: [] const Point) !void {
+    pub fn drawLines(ren: Renderer, points: []const Point) !void {
         if (c.SDL_RenderDrawLines(ren.ptr, @ptrCast(points.ptr), @intCast(points.len)) < 0)
             return makeError();
     }
@@ -736,7 +736,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn drawLinesF(ren: Renderer, points: [] const PointF) !void {
+    pub fn drawLinesF(ren: Renderer, points: []const PointF) !void {
         if (c.SDL_RenderDrawLinesF(ren.ptr, @ptrCast(points.ptr), @intCast(points.len)) < 0)
             return makeError();
     }
@@ -746,7 +746,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn drawPoints(ren: Renderer, points: [] const Point) !void {
+    pub fn drawPoints(ren: Renderer, points: []const Point) !void {
         if (c.SDL_RenderDrawPoints(ren.ptr, @ptrCast(points.ptr), @intCast(points.len)) < 0)
             return makeError();
     }
@@ -756,7 +756,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn drawPointsF(ren: Renderer, points: [] const PointF) !void {
+    pub fn drawPointsF(ren: Renderer, points: []const PointF) !void {
         if (c.SDL_RenderDrawPointsF(ren.ptr, @ptrCast(points.ptr), @intCast(points.len)) < 0)
             return makeError();
     }
@@ -766,7 +766,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn fillRects(ren: Renderer, rects: [] const Rectangle) !void {
+    pub fn fillRects(ren: Renderer, rects: []const Rectangle) !void {
         if (c.SDL_RenderFillRects(ren, @ptrCast(rects.ptr), @intCast(rects.len)) < 0)
             return makeError();
     }
@@ -776,7 +776,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn fillRectsF(ren: Renderer, rects: [] const RectangleF) !void {
+    pub fn fillRectsF(ren: Renderer, rects: []const RectangleF) !void {
         if (c.SDL_RenderFillRectsF(ren, @ptrCast(rects.ptr), @intCast(rects.len)) < 0)
             return makeError();
     }
@@ -786,7 +786,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn drawRects(ren: Renderer, rects: [] const Rectangle) !void {
+    pub fn drawRects(ren: Renderer, rects: []const Rectangle) !void {
         if (c.SDL_RenderDrawRects(ren, @ptrCast(rects.ptr), @intCast(rects.len)) < 0)
             return makeError();
     }
@@ -796,7 +796,7 @@ pub const Renderer = struct {
             return makeError();
     }
 
-    pub fn drawRectsF(ren: Renderer, rects: [] const RectangleF) !void {
+    pub fn drawRectsF(ren: Renderer, rects: []const RectangleF) !void {
         if (c.SDL_RenderDrawRectsF(ren, @ptrCast(rects.ptr), @intCast(rects.len)) < 0)
             return makeError();
     }
@@ -887,8 +887,8 @@ pub const Renderer = struct {
         };
     }
 
-    pub fn setLogicalSize(ren: Renderer, width_pixels: c_int, height_pixels: c_int) !void {
-        if (c.SDL_RenderSetLogicalSize(ren.ptr, width_pixels, height_pixels) < 0)
+    pub fn setLogicalSize(ren: Renderer, width_pixels: u32, height_pixels: u32) !void {
+        if (c.SDL_RenderSetLogicalSize(ren.ptr, @intCast(width_pixels), @intCast(height_pixels)) < 0)
             return makeError();
     }
 
